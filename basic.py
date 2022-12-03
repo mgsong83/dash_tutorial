@@ -5,6 +5,14 @@ import pandas as pd
 
 app = Dash(__name__)
 
+df = pd.DataFrame({
+    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
+    "Amount": [4, 1, 2, 2, 4, 5],
+    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
+})
+
+fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
+
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
 
@@ -17,10 +25,15 @@ app.layout = html.Div(children=[
 
     html.P("Hello world again",
         style={
-            "backgroundColor":"red",
+            "backgroundColor":"tan",
             "textAlign":"center"
-        })
+        }),
 
+    
+    dcc.Graph(
+        id='example-graph',
+        figure=fig
+    )
    
 ])
 
